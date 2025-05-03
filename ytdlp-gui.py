@@ -7,9 +7,14 @@ import threading
 def ytdlp_execute(url,format):
     print("downloading...")
     outputOption = "--output"
-    outputOptionValue = "%(title)s.%(ext)s"
+    outputOptionValue = "./downloads/%(title)s.%(ext)s"
     convertOption = get_format(format)
-    command = ["yt-dlp",outputOption, outputOptionValue]
+    pathOption = "--paths"
+    pathValue = "/downloads"
+    command = ["yt-dlp"]
+    if outputOption:
+        command.extend(outputOption.split())
+        command.extend(outputOptionValue.split())
     if convertOption:
         command.extend(convertOption.split())
     command.append(url)
