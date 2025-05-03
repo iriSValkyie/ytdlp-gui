@@ -176,3 +176,5 @@ cython_debug/
 .mp4
 
 .mp3
+
+yt-dlp.exe
