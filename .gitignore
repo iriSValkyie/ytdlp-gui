@@ -173,9 +173,9 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-.mp4
+*.mp4
 
-.mp3
+*.mp3
 
 yt-dlp.exe
 ffmpeg.exe
