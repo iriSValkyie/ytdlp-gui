@@ -3,15 +3,19 @@ import subprocess
 from tkinter import messagebox
 from tkinter import ttk
 import threading
+import sys
+import os
 
 def ytdlp_execute(url,format):
     print("downloading...")
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    yt_dlp_path = os.path.join(base_path, "yt-dlp.exe")
     outputOption = "--output"
     outputOptionValue = "./downloads/%(title)s.%(ext)s"
     convertOption = get_format(format)
-    pathOption = "--paths"
-    pathValue = "/downloads"
-    command = ["yt-dlp"]
+
+    
+    command = [yt_dlp_path]
     if outputOption:
         command.extend(outputOption.split())
         command.extend(outputOptionValue.split())
@@ -22,7 +26,7 @@ def ytdlp_execute(url,format):
     execute_button["state"] = tk.DISABLED
     progress_bar.pack(pady=10)
     progress_bar.start()
-    res = subprocess.run(command, capture_output=True, text=True, encoding=None)
+    res = subprocess.run(command, capture_output=True, text=True, encoding=None, shell=True)
     print(res.stderr)
     print(res.stdout)
     progress_bar.stop()
